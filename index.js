@@ -31,36 +31,6 @@ io.on("connection", (socket) => {
     if (client.connected == true) {
       //  Subscribe to topic 'level'
       client.subscribe(topic);
-
-      // Simulate device level monitoring
-      let level = 10;
-      let status = "rising";
-
-      setInterval(() => {
-        client.publish("level", level.toString(), console.log);
-
-        console.log(level, status);
-
-        if (status === "rising") {
-          level = level + 10;
-          console.log(`New level : ${level}`);
-        }
-
-        if (level == 90) {
-          console.log(`Changing status to falling`);
-          status = "falling";
-        }
-
-        if (status === "falling") {
-          level = level - 10;
-          console.log(`New level : ${level}`);
-        }
-
-        if (level == 20) {
-          console.log(`Changing status to rising`);
-          status = "rising";
-        }
-      }, 5000);
     }
   });
 
