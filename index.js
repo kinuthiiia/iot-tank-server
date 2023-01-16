@@ -40,10 +40,14 @@ io.on("connection", (socket) => {
     console.log("Message : " + message);
     console.log("Topic : " + topic);
 
+    // Calculate % level
+
+    let level = 100 - (parseInt(message) / 80) * 100;
+
     // Send data to dashboard via websockets
 
     socket.emit(topic, {
-      data: parseInt(message),
+      data: parseInt(level),
     });
 
     console.log("Data sent to frontend...");
