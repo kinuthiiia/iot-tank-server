@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import mqtt from "mqtt";
 
-const io = new Server(8000, {
+const io = new Server(process.env.PORT || 8000, {
   cors: { origin: "*", methods: ["GET", "POST"] },
 });
 
@@ -12,7 +12,7 @@ io.on("connection", (socket) => {
   console.log(`client ${socket.id} connected`);
 
   // Connect to MQTT server
-  let client = mqtt.connect(process.env.MQTT_BROKER);
+  let client = mqtt.connect("mqtt://localhost:1883");
 
   socket.on("start-pump", () => {
     // Send mqtt signal to device to start pump
