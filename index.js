@@ -12,9 +12,15 @@ io.on("connection", (socket) => {
   console.log(`client ${socket.id} connected`);
 
   // Connect to MQTT server
-  let client = mqtt.connect(
-    "mqtt://1387b8aada2e4198970f3b56103589c6.s2.eu.hivemq.cloud:8883"
-  );
+  let options = {
+    host: "1387b8aada2e4198970f3b56103589c6.s2.eu.hivemq.cloud",
+    port: 8883,
+    protocol: "mqtts",
+    username: "skinuthia800",
+    password: "Gearbox001",
+  };
+
+  let client = mqtt.connect(options);
 
   socket.on("start-pump", () => {
     // Send mqtt signal to device to start pump
